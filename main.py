@@ -1,3 +1,28 @@
+def interface(path='./', file='input.txt'):
+    """
+    Input:
+        path: string specifying the path towards the file.
+        file: string specifying the name of the file.
+    Output:
+        line: list of strings corresponding to each line in the input file.
+    Complexity:
+        time: O(n).
+        space: O(n).
+    Idea:
+        read each line in the file once, while storing it content
+        into a list of strings.
+    """
+
+    #print("uploading external file..")
+    with open(path+file, 'r', encoding="utf-8") as doc:
+        line = doc.readlines()
+    return line
+
+
+def sanitize_input(line):
+    print("TBD")
+
+
 def exercise1(dest):
     """
     Input:
@@ -62,11 +87,13 @@ def exercise3(pssg):
 
     #print("solving exercise 3..")
     indx = 0
-    while pssg[indx] >= 100 and indx < len(pssg):
+    while indx < len(pssg) and pssg[indx] >= 100:
         indx += 1
-    if indx == len(pssg)-1:
+    if indx >= len(pssg)-1:
+        print("No value found")
         return -1
-    return indx
+    else:
+        return indx
 
 
 def exercise4(airs, pssg):
@@ -108,9 +135,13 @@ def exercise4(airs, pssg):
 
 def main():
     #print("beggining of execution..")
-    airs = ["Alitalia", "Alitalia", "Germanwings", "Germanwings", "NorwegianAir", "Wizzair", "Wizzair", "Wizzair"]
-    dest = ["Rome", "Pisa", "Munich", "Frankfurt", "Bergen", "London", "Frankfurt", "Lisbon"]
-    pssg = [180, 82, 96, 163, 202, 184, 83, 198]
+    line = interface()
+    print(line)
+    sanitize_input(line)
+    """
+    airs = ["Alitalia", "Wizzair", "Wizzair"] # ["Alitalia", "Alitalia", "Germanwings", "Germanwings", "NorwegianAir", "Wizzair", "Wizzair", "Wizzair"]
+    dest = ["Rome", "Cracow", "Barcelona"] # ["Rome", "Pisa", "Munich", "Frankfurt", "Bergen", "London", "Frankfurt", "Lisbon"]
+    pssg = [180, 100, 150] # [180, 82, 96, 163, 202, 184, 83, 198]
 
     cntr1 = exercise1(dest)
     indx2 = exercise2(pssg)
@@ -121,6 +152,7 @@ def main():
     print(airs[indx2], dest[indx2], pssg[indx2])
     print(airs[indx3], dest[indx3], pssg[indx3])
     print(airs[indx4], most4)
+    """
 
 
 main()
