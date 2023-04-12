@@ -9,8 +9,9 @@ def interface(path='./', file='input.txt'):
         time: O(n).
         space: O(n).
     Idea:
-        read each line in the file once, while storing it content
-        into a list of strings.
+        given a file called "file", by default "input.txt", at the
+        current directory, i.e path = "./", read each line in the
+        file once, while storing their content into a list of strings.
     """
 
     #print("uploading external file..")
@@ -43,7 +44,7 @@ def sanitize_input(lines):
         airl, dest, pssg = line.split(' ')
         airls.append(airl)
         dests.append(dest)
-        pssgs.append(int(pssg[:-2]))
+        pssgs.append(int(pssg))
     return airls, dests, pssgs
 
 
@@ -86,7 +87,7 @@ def exercise2(pssgs):
     """
 
     #print("solving exercise 2..")
-    indx = 0
+    indx = -1
     maxi = 0
     for i, pssg in enumerate(pssgs):
         if pssg > maxi:
@@ -114,7 +115,6 @@ def exercise3(pssgs):
     while indx < len(pssgs) and pssgs[indx] >= 100:
         indx += 1
     if indx >= len(pssgs)-1:
-        print("No value found")
         return -1
     else:
         return indx
@@ -140,7 +140,7 @@ def exercise4(airls, pssgs):
     """
 
     #print("solving exercise 4..")
-    indx = 0
+    indx = -1
     most = 0
     cntr = pssgs[0]
     for i in range(1, len(airls)):
@@ -157,23 +157,35 @@ def exercise4(airls, pssgs):
     return indx, most
 
 
-def main():
-    #print("beggining of execution..")
-    line = interface()
-    print(line)
-    airls, dests, pssgs = sanitize_input(line)
-    print(airls)
-    print(dests)
-    print(pssgs)
+def solution(verbose=True):
+    print()
+    lines = interface()
+    airls, dests, pssgs = sanitize_input(lines)
 
     cntr1 = exercise1(dests)
     indx2 = exercise2(pssgs)
     indx3 = exercise3(pssgs)
     indx4, most4 = exercise4(airls, pssgs)
 
-    print(cntr1)
-    print(airls[indx2], dests[indx2], pssgs[indx2])
-    print(airls[indx3], dests[indx3], pssgs[indx3])
-    print(airls[indx4], most4)
+    if verbose:
+        print(cntr1)
+        if indx2 == -1:
+            print("The file is empty!")
+        else:
+            print(airls[indx2], dests[indx2], pssgs[indx2])
+        if indx3 == -1:
+            print("There is no flight with passengers less than 100.")
+        else:
+            print(airls[indx3], dests[indx3], pssgs[indx3])
+        if indx4 == -1:
+            print("The file is empty!")
+        else:
+            print(airls[indx4], most4)
+
+
+def main():
+    #print("beggining of execution..")
+    solution()
+
 
 main()
