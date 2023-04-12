@@ -4,6 +4,8 @@
     Date: April 2023.
 """
 
+import re
+
 def interface(path='./', file='input.txt'):
     """
     Input:
@@ -51,7 +53,7 @@ def sanitize_input(lines):
     dests = []
     pssgs = []
     for line in lines:
-        airl, dest, pssg = line.split(' ')
+        airl, dest, pssg = line.split()
         airls.append(airl)
         dests.append(dest)
         pssgs.append(int(pssg))
@@ -189,7 +191,10 @@ def solution(verbose=True):
     """
 
     #print("solving assignment..")
-    lines = interface()
+    path='./'
+    file='input.txt'
+    lines = interface(path, file)
+
     airls, dests, pssgs = sanitize_input(lines)
 
     cntr1 = exercise1(dests)
