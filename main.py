@@ -1,3 +1,9 @@
+"""
+    Title: Eotvos Lorand University Assignment solution.
+    Author: Esteban Hernandez Ramirez.
+    Date: April 2023.
+"""
+
 def interface(path='./', file='input.txt'):
     """
     Input:
@@ -158,7 +164,23 @@ def exercise4(airls, pssgs):
 
 
 def solution(verbose=True):
-    print()
+    """
+    Input:
+        verbose: string indicating to print out in console the flow.
+    Output:
+        cntr1: int variable, solution to exercise 1
+        indx2: int variable, solution to exercise 2
+        indx3: int variable, solution to exercise 3
+        indx4: int variable, solution to exercise 4
+        most4: int variable, solution to exercise 4
+    Complexity:
+        time: O(n).
+        space: O(n).
+    Idea:
+        invoked by main() function only.
+    """
+
+    #print("solving assignment..")
     lines = interface()
     airls, dests, pssgs = sanitize_input(lines)
 
@@ -182,8 +204,22 @@ def solution(verbose=True):
         else:
             print(airls[indx4], most4)
 
+    return cntr1, indx2, indx3, indx4, most4
+
 
 def main():
+    """
+    Input:
+        None.
+    Output:
+        None.
+    Complexity:
+        time: O(n).
+        space: O(n).
+    Idea:
+        Execute this function first.
+    """
+
     #print("beggining of execution..")
     solution()
 
