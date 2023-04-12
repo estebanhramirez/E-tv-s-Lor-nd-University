@@ -4,7 +4,6 @@
     Date: April 2023.
 """
 
-import re
 
 def interface(path='./', file='input.txt'):
     """
