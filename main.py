@@ -4,7 +4,7 @@ def interface(path='./', file='input.txt'):
         path: string specifying the path towards the file.
         file: string specifying the name of the file.
     Output:
-        line: list of strings corresponding to each line in the input file.
+        lines: list of strings corresponding to each raw line in the input file.
     Complexity:
         time: O(n).
         space: O(n).
@@ -15,18 +15,42 @@ def interface(path='./', file='input.txt'):
 
     #print("uploading external file..")
     with open(path+file, 'r', encoding="utf-8") as doc:
-        line = doc.readlines()
-    return line
+        lines = doc.readlines()
+    return lines
 
 
-def sanitize_input(line):
-    print("TBD")
-
-
-def exercise1(dest):
+def sanitize_input(lines):
     """
     Input:
-        dest: list of strings abstracting flights' destinations.
+        lines: list of strings corresponding to each raw line in the input file.
+    Output:
+        airls: list of strings corresponding to the airline name of each flight.
+        dests: list of strings corresponding to the destinations of each flight.
+        pssgs: list of ints corresponding to the number of passengers of each flight.
+    Complexity:
+        time: O(n).
+        space: O(n).
+    Idea:
+        read each line in the file once, while storing it content
+        into a list of strings.
+    """
+
+    #print("sanitizing input lines..")
+    airls = []
+    dests = []
+    pssgs = []
+    for line in lines:
+        airl, dest, pssg = line.split(' ')
+        airls.append(airl)
+        dests.append(dest)
+        pssgs.append(int(pssg[:-2]))
+    return airls, dests, pssgs
+
+
+def exercise1(dests):
+    """
+    Input:
+        dests: list of strings abstracting flights' destinations.
     Output:
         cntr: num of flights with destination "Frankfurt".
     Complexity:
@@ -40,17 +64,17 @@ def exercise1(dest):
 
     #print("solving exercise 1..")
     cntr = 0
-    for destination in dest:
-        if destination == "Frankfurt":
+    for dest in dests:
+        if dest == "Frankfurt":
             cntr += 1
 
     return cntr
 
 
-def exercise2(pssg):
+def exercise2(pssgs):
     """
     Input:
-        pssg: list of ints abstracting number of passengers per each flight.
+        pssgs: list of ints abstracting number of passengers per each flight.
     Output:
         indx: list index of the corresponding flight with max # of passengers.
     Complexity:
@@ -64,17 +88,17 @@ def exercise2(pssg):
     #print("solving exercise 2..")
     indx = 0
     maxi = 0
-    for i, n_passenger in enumerate(pssg):
-        if n_passenger > maxi:
+    for i, pssg in enumerate(pssgs):
+        if pssg > maxi:
             indx = i
-            maxi = n_passenger
+            maxi = pssg
     return indx
 
 
-def exercise3(pssg):
+def exercise3(pssgs):
     """
     Input:
-        pssg: list of ints abstracting number of passengers per each flight.
+        pssgs: list of ints abstracting number of passengers per each flight.
     Output:
         indx: list index of corresponding first flight with < 100 passengers.
     Complexity:
@@ -87,20 +111,20 @@ def exercise3(pssg):
 
     #print("solving exercise 3..")
     indx = 0
-    while indx < len(pssg) and pssg[indx] >= 100:
+    while indx < len(pssgs) and pssgs[indx] >= 100:
         indx += 1
-    if indx >= len(pssg)-1:
+    if indx >= len(pssgs)-1:
         print("No value found")
         return -1
     else:
         return indx
 
 
-def exercise4(airs, pssg):
+def exercise4(airls, pssgs):
     """
     Input:
-        airs: list of strings abstracting airlines' names.
-        pssg: list of ints abstracting number of passengers per each flight.
+        airls: list of strings abstracting airlines' names.
+        pssgs: list of ints abstracting number of passengers per each flight.
     Output:
         indx: list index corresponding to airline with most total num of passengers.
     Complexity:
@@ -118,17 +142,17 @@ def exercise4(airs, pssg):
     #print("solving exercise 4..")
     indx = 0
     most = 0
-    cntr = pssg[0]
-    for i in range(1, len(airs)):
-        if airs[i-1] != airs[i]:
+    cntr = pssgs[0]
+    for i in range(1, len(airls)):
+        if airls[i-1] != airls[i]:
             if cntr > most:
                 indx = i
                 most = cntr
             cntr = 0
-        cntr += pssg[i]
+        cntr += pssgs[i]
 
     if cntr > most:
-        indx = len(airs)-1
+        indx = len(airls)-1
         most = cntr
     return indx, most
 
@@ -137,22 +161,19 @@ def main():
     #print("beggining of execution..")
     line = interface()
     print(line)
-    sanitize_input(line)
-    """
-    airs = ["Alitalia", "Wizzair", "Wizzair"] # ["Alitalia", "Alitalia", "Germanwings", "Germanwings", "NorwegianAir", "Wizzair", "Wizzair", "Wizzair"]
-    dest = ["Rome", "Cracow", "Barcelona"] # ["Rome", "Pisa", "Munich", "Frankfurt", "Bergen", "London", "Frankfurt", "Lisbon"]
-    pssg = [180, 100, 150] # [180, 82, 96, 163, 202, 184, 83, 198]
+    airls, dests, pssgs = sanitize_input(line)
+    print(airls)
+    print(dests)
+    print(pssgs)
 
-    cntr1 = exercise1(dest)
-    indx2 = exercise2(pssg)
-    indx3 = exercise3(pssg)
-    indx4, most4 = exercise4(airs, pssg)
+    cntr1 = exercise1(dests)
+    indx2 = exercise2(pssgs)
+    indx3 = exercise3(pssgs)
+    indx4, most4 = exercise4(airls, pssgs)
 
     print(cntr1)
-    print(airs[indx2], dest[indx2], pssg[indx2])
-    print(airs[indx3], dest[indx3], pssg[indx3])
-    print(airs[indx4], most4)
-    """
-
+    print(airls[indx2], dests[indx2], pssgs[indx2])
+    print(airls[indx3], dests[indx3], pssgs[indx3])
+    print(airls[indx4], most4)
 
 main()
