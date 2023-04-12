@@ -18,6 +18,10 @@ def interface(path='./', file='input.txt'):
         given a file called "file", by default "input.txt", at the
         current directory, i.e path = "./", read each line in the
         file once, while storing their content into a list of strings.
+        Take advantage of the fact that each line of the file contains
+        two strings and an integer number, separated by whitespaces
+        and the airline and the destination (name of a city) do not
+        contain space character.
     """
 
     #print("uploading external file..")
@@ -148,18 +152,22 @@ def exercise4(airls, pssgs):
     #print("solving exercise 4..")
     indx = -1
     most = 0
-    cntr = pssgs[0]
-    for i in range(1, len(airls)):
-        if airls[i-1] != airls[i]:
+    cntr = 0
+    for i in range(0, len(airls)-1):
+        cntr += pssgs[i]
+        if airls[i] != airls[i+1]:
             if cntr > most:
                 indx = i
                 most = cntr
             cntr = 0
-        cntr += pssgs[i]
+
+        if i == len(airls)-2:
+            cntr += pssgs[-1]
 
     if cntr > most:
         indx = len(airls)-1
         most = cntr
+
     return indx, most
 
 
