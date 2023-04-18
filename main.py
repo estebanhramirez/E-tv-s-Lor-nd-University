@@ -75,14 +75,17 @@ def exercise1(dests):
         time: O(n).
         space: O(n).
     Explanation:
-        since the flights are ordered by airline name, instead of destination name,
-        reordering the list by 'destination' would take at worst O(n log n) operations...
-        furthermore, since the destination name "Frankfurt" could appear anywhere in the
-        list, in the best linear implementation we have to visit all elements in the list
-        once, in order to know whether to count them or not: access every entry in the
-        list once, to check if its value equals the string "Frankfurt"; if it does, update
-        a counter of the number of times the destination "Frankfurt" appeared, increasing
-        it by one unit.
+        since the flights are ordered by airline name, instead of destination name, we
+        cannot simply sum up consecutive occurrences of the destination "Frankfurt" in
+        some binary search fashion, with, on average, O(log n) operations, and
+        reordering the list by 'destination' would take at worst O(n log n) operations,
+        thus, a linear time implementation is prefered...
+
+        since the destination name "Frankfurt" could appear anywhere in the list, in the best
+        linear implementation, we have to visit all elements in the list once, in order to
+        know whether to count them or not: access every entry in the list once, to check if
+        its value equals the string "Frankfurt"; if it does, update a counter of the number
+        of times the destination "Frankfurt" appeared, increasing it by one unit.
     """
 
     cntr = 0
@@ -102,9 +105,17 @@ def exercise2(pssgs):
     Complexity:
         time: O(n).
         space: O(n).
-    Idea:
-        Compare all elements in the list once with and update a max variable
-        every time.
+    Explanation:
+        since the flights are ordered by airline name, instead of number of passengers
+        per flight, the flights with minimum and maximum number of passengers do not
+        correspond to the first and last element in the list, respectively, and
+        reordering the list by 'destination' would take at worst O(n log n) operations,
+        thus, a linear time implementation is prefered...
+
+        since the maximum could appear anywhere in the list, we have to keep record
+        of a local maximum variable and index, then do a linear scan through every
+        element in the list, so that if the element is greater than the current maximum,
+        it is updated with this element and the index is updated.
     """
 
     indx = -1
