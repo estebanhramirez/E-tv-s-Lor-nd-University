@@ -101,21 +101,21 @@ def exercise2(pssgs):
     Input:
         pssgs: list of ints abstracting number of passengers per each flight.
     Output:
-        indx: list index of the corresponding flight with max # of passengers.
+        indx: list index of the corresponding flight with maximum number of passengers.
     Complexity:
         time: O(n).
         space: O(n).
     Explanation:
         since the flights are ordered by airline name, instead of number of passengers
         per flight, the flights with minimum and maximum number of passengers do not
-        correspond to the first and last element in the list, respectively, and
+        correspond to the first and last elements in the list, respectively, and
         reordering the list by 'destination' would take at worst O(n log n) operations,
         thus, a linear time implementation is prefered...
 
         since the maximum could appear anywhere in the list, we have to keep record
-        of a local maximum variable and index, then do a linear scan through every
+        of a local maximum variable and its index, then do a linear scan through every
         element in the list, so that if the element is greater than the current maximum,
-        it is updated with this element and the index is updated.
+        it is updated with this element and the current index is reset.
     """
 
     indx = -1
