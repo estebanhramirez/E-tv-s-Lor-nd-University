@@ -2,8 +2,9 @@
     Title: Eotvos Lorand University PROBLEM 1 Assignment solution.
     Author: Esteban Hernandez Ramirez.
     Date: April 2023.
-    HTTPS: https://github.com/estebanhramirez/Eotvos-Lorand-University.git
-    SSH: git@github.com:estebanhramirez/Eotvos-Lorand-University.git
+    GitHub repository:
+        HTTPS: https://github.com/estebanhramirez/Eotvos-Lorand-University.git
+        SSH: git@github.com:estebanhramirez/Eotvos-Lorand-University.git
 """
 
 
@@ -18,7 +19,8 @@ def interface(path='./', file='input.txt'):
         time: O(n).
         space: O(n).
     Implementation:
-        import the raw lines in the file as a list: 'lines'.
+        import the raw lines of the input file into Python as a list of composed
+        strings, 'lines'.
     """
 
     with open(path+file, 'r', encoding="utf-8") as doc:
@@ -26,7 +28,7 @@ def interface(path='./', file='input.txt'):
     return lines
 
 
-def sanitize_input(lines):
+def split_lines(lines):
     """
     Input:
         lines: list of strings corresponding to each raw line in the input file.
@@ -39,16 +41,17 @@ def sanitize_input(lines):
         space: O(n).
     Implementation:
         since the airline and destination names do not contain space characters,
-        neither does the number of passengers, we can split each line of the file
-        by white-space characters, to retrieve a tuple made of three items:
+        neither does the number of passengers, we split each line of the file by
+        white-space characters, to retrieve a tuple made of three items:
             - name of the airline that operates the given flight (string variable)
             - destination of the flight (string variable)
             - number of passengers transported by the flight (int variable)
         * we parse the number of passengers to 'int' type * ...
 
-        we append each splitted line's items to different lists; 'airls', 'dests'
-        and 'pssgs', this way, we preserve the ascending alphabetical order of the
-        flights by airline name, for future use.
+        we append each splitted line's items to their corresponding lists; 'airls',
+        'dests' or 'pssgs', in the same order the lines were read from the file.
+        This way, we preserve the ascending alphabetical order of the flights by
+        airline name.
     """
 
     airls = []
@@ -65,16 +68,21 @@ def sanitize_input(lines):
 def exercise1(dests):
     """
     Input:
-        dests: list of strings abstracting flights' destinations.
+        dests: list of strings corresponding to the destinations of each flight.
     Output:
         cntr: num of flights with destination "Frankfurt".
     Complexity:
         time: O(n).
         space: O(n).
-    Idea:
-        loop through the list once, so every time the destination
-        "Frankfurt" is found update the count of the number of
-        times it appears in the list.
+    Implementation:
+        since the flights are ordered by airline name, instead of destination name,
+        reordering the list by 'destination' would take at worst O(n log n) operations...
+        furthermore, since the destination name "Frankfurt" could appear anywhere in the
+        list, in the best linear implementation we have to visit all elements in the list
+        once, in order to know whether to count them or not...
+        so, our implementation accesses every entry in the list once, to check if its
+        value equals the string "Frankfurt"; if it does, update a counter of the number
+        of times the destination "Frankfurt" appeared, increasing it one unit.
     """
 
     cntr = 0
@@ -192,7 +200,7 @@ def solution(verbose=True):
     file='input.txt'
     lines = interface(path, file)
 
-    airls, dests, pssgs = sanitize_input(lines)
+    airls, dests, pssgs = split_lines(lines)
 
     cntr1 = exercise1(dests)
     indx2 = exercise2(pssgs)
