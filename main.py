@@ -1,31 +1,26 @@
 """
-    Title: Eotvos Lorand University Assignment solution.
+    Title: Eotvos Lorand University PROBLEM 1 Assignment solution.
     Author: Esteban Hernandez Ramirez.
     Date: April 2023.
+    HTTPS: https://github.com/estebanhramirez/Eotvos-Lorand-University.git
+    SSH: git@github.com:estebanhramirez/Eotvos-Lorand-University.git
 """
 
 
 def interface(path='./', file='input.txt'):
     """
     Input:
-        path: string specifying the path towards the file.
-        file: string specifying the name of the file.
+        path: string variable specifying the path towards the file.
+        file: string variable specifying the name of the file.
     Output:
         lines: list of strings corresponding to each raw line in the input file.
     Complexity:
         time: O(n).
         space: O(n).
-    Idea:
-        given a file called "file", by default "input.txt", at the
-        current directory, i.e path = "./", read each line in the
-        file once, while storing their content into a list of strings.
-        Take advantage of the fact that each line of the file contains
-        two strings and an integer number, separated by whitespaces
-        and the airline and the destination (name of a city) do not
-        contain space character.
+    Implementation:
+        import the raw lines in the file as a list: 'lines'.
     """
 
-    #print("uploading external file..")
     with open(path+file, 'r', encoding="utf-8") as doc:
         lines = doc.readlines()
     return lines
@@ -42,12 +37,20 @@ def sanitize_input(lines):
     Complexity:
         time: O(n).
         space: O(n).
-    Idea:
-        read each line in the file once, while storing it content
-        into a list of strings.
+    Implementation:
+        since the airline and destination names do not contain space characters,
+        neither does the number of passengers, we can split each line of the file
+        by white-space characters, to retrieve a tuple made of three items:
+            - name of the airline that operates the given flight (string variable)
+            - destination of the flight (string variable)
+            - number of passengers transported by the flight (int variable)
+        * we parse the number of passengers to 'int' type * ...
+
+        we append each splitted line's items to different lists; 'airls', 'dests'
+        and 'pssgs', this way, we preserve the ascending alphabetical order of the
+        flights by airline name, for future use.
     """
 
-    #print("sanitizing input lines..")
     airls = []
     dests = []
     pssgs = []
@@ -74,7 +77,6 @@ def exercise1(dests):
         times it appears in the list.
     """
 
-    #print("solving exercise 1..")
     cntr = 0
     for dest in dests:
         if dest == "Frankfurt":
@@ -97,7 +99,6 @@ def exercise2(pssgs):
         every time.
     """
 
-    #print("solving exercise 2..")
     indx = -1
     maxi = 0
     for i, pssg in enumerate(pssgs):
@@ -121,7 +122,6 @@ def exercise3(pssgs):
         found or the iterable index exceeds the list's size.
     """
 
-    #print("solving exercise 3..")
     indx = 0
     while indx < len(pssgs) and pssgs[indx] >= 100:
         indx += 1
@@ -150,7 +150,6 @@ def exercise4(airls, pssgs):
         sum is grater than the greatest sum yet, stored in a temp variable.
     """
 
-    #print("solving exercise 4..")
     indx = -1
     most = 0
     cntr = 0
@@ -189,7 +188,6 @@ def solution(verbose=True):
         invoked by main() function only.
     """
 
-    #print("solving assignment..")
     path='./'
     file='input.txt'
     lines = interface(path, file)
@@ -232,7 +230,6 @@ def main():
         Execute this function first.
     """
 
-    #print("beggining of execution..")
     solution()
 
 

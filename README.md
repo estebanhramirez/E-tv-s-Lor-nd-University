@@ -1,1 +1,1 @@
-# E-tv-s-Lor-nd-University
+# Eotvos-Lorand-University EntranceExam Assignment
