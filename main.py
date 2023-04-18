@@ -18,7 +18,7 @@ def interface(path='./', file='input.txt'):
     Complexity:
         time: O(n).
         space: O(n).
-    Implementation:
+    Explanation:
         import the raw lines of the input file into Python as a list of composed
         strings, 'lines'.
     """
@@ -39,7 +39,7 @@ def split_lines(lines):
     Complexity:
         time: O(n).
         space: O(n).
-    Implementation:
+    Explanation:
         since the airline and destination names do not contain space characters,
         neither does the number of passengers, we split each line of the file by
         white-space characters, to retrieve a tuple made of three items:
@@ -70,19 +70,19 @@ def exercise1(dests):
     Input:
         dests: list of strings corresponding to the destinations of each flight.
     Output:
-        cntr: num of flights with destination "Frankfurt".
+        cntr: number of flights with destination "Frankfurt".
     Complexity:
         time: O(n).
         space: O(n).
-    Implementation:
+    Explanation:
         since the flights are ordered by airline name, instead of destination name,
         reordering the list by 'destination' would take at worst O(n log n) operations...
         furthermore, since the destination name "Frankfurt" could appear anywhere in the
         list, in the best linear implementation we have to visit all elements in the list
-        once, in order to know whether to count them or not...
-        so, our implementation accesses every entry in the list once, to check if its
-        value equals the string "Frankfurt"; if it does, update a counter of the number
-        of times the destination "Frankfurt" appeared, increasing it one unit.
+        once, in order to know whether to count them or not: access every entry in the
+        list once, to check if its value equals the string "Frankfurt"; if it does, update
+        a counter of the number of times the destination "Frankfurt" appeared, increasing
+        it by one unit.
     """
 
     cntr = 0
