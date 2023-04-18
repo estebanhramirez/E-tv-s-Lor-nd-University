@@ -16,11 +16,23 @@ def interface(path='./', file='input.txt'):
     Output:
         lines: list of strings corresponding to each raw line in the input file.
     Complexity:
-        time: O(n).
-        space: O(n).
+        time: O(n), where n is the number of flights.
+        space: O(n), where n is the number of flights.
+
     Explanation:
-        import the raw lines of the input file into Python as a list of composed
-        strings, 'lines'.
+        since the input file, 'input.txt', contains structured data, such that each line of
+        the file aims to store information about a different outbound flight from Budapest,
+        each line is made of two strings and an integer number, separated by whitespaces, that
+        describe the given flight...
+
+        the file is splitted by the '\n' -new line- character, by processig the file once and 
+        saving a new line when the '\n' character is found at the end of a line...
+        the raw lines of the input file are imported into Python as a list of composed strings,
+        'lines'. This way we preserve the structure of the data by having each entry in the
+        'lines' list corresponding to the description of a different flight, furthermore,
+        this approach preserves the relative order of the file.
+
+        * the size of the file is proportional to the number of flights registered in it *
     """
 
     with open(path+file, 'r', encoding="utf-8") as doc:
@@ -37,21 +49,23 @@ def split_lines(lines):
         dests: list of strings corresponding to the destinations of each flight.
         pssgs: list of ints corresponding to the number of passengers of each flight.
     Complexity:
-        time: O(n).
-        space: O(n).
+        time: O(n), where n is the number of flights.
+        space: O(n), where n is the number of flights.
+
     Explanation:
         since the airline and destination names do not contain space characters,
         neither does the number of passengers, we split each line of the file by
         white-space characters, to retrieve a tuple made of three items:
-            - name of the airline that operates the given flight (string variable)
-            - destination of the flight (string variable)
-            - number of passengers transported by the flight (int variable)
+            - name of airline that operates the given flight (string variable)
+            - destination of the given flight (string variable)
+            - number of passengers transported by the given flight (int variable)
+
         * we parse the number of passengers to 'int' type * ...
 
-        we append each splitted line's items to their corresponding lists; 'airls',
-        'dests' or 'pssgs', in the same order the lines were read from the file.
-        This way, we preserve the ascending alphabetical order of the flights by
-        airline name.
+        we traverse the list of lines once, while appending each splitted line's
+        items to their corresponding lists, 'airls', 'dests' or 'pssgs', in the
+        same order as the lines were read from the file. This way, we preserve the
+        ascending alphabetical order of the flights by airline name.
     """
 
     airls = []
@@ -72,8 +86,9 @@ def exercise1(dests):
     Output:
         cntr: number of flights with destination "Frankfurt".
     Complexity:
-        time: O(n).
-        space: O(n).
+        time: O(n), where n is the number of flights.
+        space: O(n), where n is the number of flights.
+
     Explanation:
         since the flights are ordered by airline name, instead of destination name, we
         cannot simply sum up consecutive occurrences of the destination "Frankfurt" in
@@ -103,8 +118,9 @@ def exercise2(pssgs):
     Output:
         indx: list index of the corresponding flight with maximum number of passengers.
     Complexity:
-        time: O(n).
-        space: O(n).
+        time: O(n), where n is the number of flights.
+        space: O(n), where n is the number of flights.
+
     Explanation:
         since the flights are ordered by airline name, instead of number of passengers
         per flight, the flights with minimum and maximum number of passengers do not
