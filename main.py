@@ -152,15 +152,16 @@ def find_first_less_100_flight(pssgs):
         time: O(n)
         space: O(n)
     Idea:
-        Since the flights are ordered by airline name, instead of number of
-        passengers per flight, then the first flight with less than 100
-        passengers can occur anywhere in the list and its position cannot
-        be deduced from its surrounding neighbours. Therefore, we must loop
-        through the list until the first flight with less than 100 passengers
-        is found or the iterable index exceeds the list's size. In the worst
-        case escenario, this element can be last of the list, or can never
+        Since the flights are ordered  by airline name,  instead of number
+        of passengers per flight, then the first flight with less than 100
+        passengers can occur anywhere  in the list and its position cannot
+        be deduced  from its surrounding entries.  Therefore, we must loop
+        through 'pssgs' until the first flight with less than 100 passengers
+        is found or the iterable index exceeds the number of flights.   In
+        the worst case, this element can be last of the list, or can never
         occur in the list. Thus the best possible implementation must be a
-        linear time and storage complexity algorithm on the number of flights.
+        linear, in time and storage,  complexity algorithm,  on the number
+        of flights.
     """
 
     indx = 0
@@ -185,13 +186,13 @@ def find_max_passengers_airline(airls, pssgs):
         space: O(n)
     Idea:
         Since the flights are ordered by airline name, we can take advantage
-        of the fact that that all flights supported by the same airline are
-        contiguous in the list. This way, we can sum consecutive entries,
-        until next entry corresponds to a different airline, then we compare
-        if the current sum is greater than the greatest sum yet, stored in a
-        temp variable, and reset with the sum of the current airline. Thus,
-        this implementation has a linear time and storage complexity on the
-        number of flights.
+        of the fact that that  all flights supported by the same airline are
+        contiguous in the list. This way,  we sum consecutive entries, until
+        the next entry corresponds to  a different airline, then we check if
+        the  current sum is greater than  the greatest sum yet, stored  in a
+        temp variable; if it does we reset the temp variable with the sum of
+        the current airline. Thus, this implementation has a linear time and
+        storage complexity on the number of flights.
     """
 
     indx = -1
