@@ -13,4 +13,5 @@ Iberia Frankfurt 200
 Iberia Frankfurt 400
 AirFrance Frankfurt 190
 AirFrance Frankfurt 180
+easyJet Frankfurt 100
 easyJet Frankfurt 90
