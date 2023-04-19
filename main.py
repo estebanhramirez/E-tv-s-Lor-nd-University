@@ -11,13 +11,13 @@
 def import_flights(path='./', file='input.txt'):
     """
     Input:
-        path: string variable specifying the path towards the file.
-        file: string variable specifying the name of the file.
+        path: [str] string variable specifying the path towards the file
+        file: [str] string variable specifying the name of the file
     Output:
-        lines: list of strings corresponding to each raw line in the input file.
+        lines: [str array] list of raw lines of the input file
     Complexity:
-        time: O(n), where n is the number of flights.
-        space: O(n), where n is the number of flights.
+        time: O(n)
+        space: O(n)
     Explanation:
         Since the input file, 'input.txt', contains structured data, such
         that each line is made of two strings and an integer number, separated
@@ -42,14 +42,14 @@ def import_flights(path='./', file='input.txt'):
 def split_lines(lines):
     """
     Input:
-        lines: list of strings corresponding to each raw line in the input file.
+        lines: [str array] list of raw lines of the input file
     Output:
-        airls: list of strings corresponding to the airline name of each flight.
-        dests: list of strings corresponding to the destinations of each flight.
-        pssgs: list of ints corresponding to the number of passengers of each flight.
+        airls: [str array] list of airlines for each flight
+        dests: [str array] list of destinations for each flight
+        pssgs: [int array] list of number of passengers for each flight
     Complexity:
-        time: O(n), where n is the number of flights.
-        space: O(n), where n is the number of flights.
+        time: O(n)
+        space: O(n)
     Explanation:
         Since the airline and destination names do not contain space characters,
         neither does the number of passengers, we split each line of the file by
@@ -81,12 +81,12 @@ def split_lines(lines):
 def count_to_frankfurt_flights(dests):
     """
     Input:
-        dests: list of strings corresponding to the destinations of each flight.
+        dests: [str array] list of destinations for each flight
     Output:
-        cntr: number of flights with destination "Frankfurt".
+        cntr: [int] number of flights with destination "Frankfurt"
     Complexity:
-        time: O(n), where n is the number of flights.
-        space: O(n), where n is the number of flights.
+        time: O(n)
+        space: O(n)
     Explanation:
         Since the flights are ordered by airline name, instead of destination name, we
         cannot simply sum up consecutive occurrences of the destination "Frankfurt" in
@@ -112,13 +112,12 @@ def count_to_frankfurt_flights(dests):
 def find_max_passengers_flight(pssgs):
     """
     Input:
-        pssgs: list of ints abstracting number of passengers per each flight.
+        pssgs: [int array] list of number of passengers for each flight
     Output:
-        indx: list index of the corresponding flight with maximum number of passengers.
+        indx: [int] list index of flight with the most number of passengers
     Complexity:
-        time: O(n), where n is the number of flights.
-        space: O(n), where n is the number of flights.
-
+        time: O(n)
+        space: O(n)
     Explanation:
         since the flights are ordered by airline name, instead of number of passengers
         per flight, the flights with minimum and maximum number of passengers do not
@@ -144,12 +143,12 @@ def find_max_passengers_flight(pssgs):
 def find_first_less_100_flight(pssgs):
     """
     Input:
-        pssgs: list of ints abstracting number of passengers per each flight.
+        pssgs: [int array] list of number of passengers for each flight
     Output:
-        indx: list index of corresponding first flight with < 100 passengers.
+        indx: [int] list index of first flight with less than 100 passengers
     Complexity:
-        time: O(n).
-        space: O(n).
+        time: O(n)
+        space: O(n)
     Idea:
         loop through the list until the first flight with < 100 passengers is
         found or the iterable index exceeds the list's size.
@@ -167,13 +166,13 @@ def find_first_less_100_flight(pssgs):
 def find_max_passengers_airline(airls, pssgs):
     """
     Input:
-        airls: list of strings abstracting airlines' names.
-        pssgs: list of ints abstracting number of passengers per each flight.
+        airls: [str array] list of airlines for each flight
+        pssgs: [int array] list of number of passengers for each flight
     Output:
-        indx: list index corresponding to airline with most total num of passengers.
+        indx: [int] list index of airline with most total number of passengers
     Complexity:
-        time: O(n).
-        space: O(n).
+        time: O(n)
+        space: O(n)
     Idea:
         take advantage of the fact that the file is sorted by airline in
         ascending alphabetical order, so it is a matter of fact that all
@@ -209,16 +208,15 @@ def solve_problem_1():
     Input:
         verbose: string indicating to print out in console the flow.
     Output:
-        cntr1: int variable, solution to exercise 1
-        indx2: int variable, solution to exercise 2
-        indx3: int variable, solution to exercise 3
-        indx4: int variable, solution to exercise 4
-        most4: int variable, solution to exercise 4
+        ans_exe_1: [int] number of flights with destination "Frankfurt"
+        ans_exe_2: [str] flight with the most number of passengers
+        ans_exe_3: [str] first flight with less than 100 passengers
+        ans_exe_4: [tuple] airline with most total number of passengers
     Complexity:
         time: O(n).
-        space: O(n).
-    Idea:
-        invoked by main() function only.
+        storage: O(n).
+    Explanation:
+        Invoked by main() function only.
     """
 
     path='./'
@@ -236,7 +234,7 @@ def solve_problem_1():
     ans_exe_1 = cntr_to_frankfurt_flights
     ans_exe_2 = ""
     ans_exe_3 = ""
-    ans_exe_4 = ""
+    ans_exe_4 = None
     if idx_max_passengers_flight == -1:
         ans_exe_2 += "The file is empty!"
     else:
@@ -252,10 +250,9 @@ def solve_problem_1():
         ans_exe_3 += str(pssgs[idx_first_less_100_flight])
 
     if idx_max_passenger_airline == -1:
-        ans_exe_4 += "The file is empty!"
+        ans_exe_4 = "The file is empty!"
     else:
-        ans_exe_4 += airls[idx_max_passenger_airline] + ' '
-        ans_exe_4 += str(cnt)
+        ans_exe_4 = (airls[idx_max_passenger_airline], cnt)
 
     return (ans_exe_1, ans_exe_2, ans_exe_3, ans_exe_4)
 
@@ -263,13 +260,13 @@ def solve_problem_1():
 def main():
     """
     Input:
-        None.
+        None
     Output:
-        None.
+        None
     Complexity:
-        time: O(n).
-        space: O(n).
-    Idea:
+        time: O(n)
+        space: O(n)
+    Explanation:
         Execute this function first.
     """
 
@@ -278,7 +275,7 @@ def main():
     print(ans_exe_1)
     print(ans_exe_2)
     print(ans_exe_3)
-    print(ans_exe_4)
+    print(ans_exe_4[0], ans_exe_4[1])
 
     return 0
 
