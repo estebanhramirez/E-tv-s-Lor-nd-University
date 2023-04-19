@@ -222,16 +222,16 @@ def solve_problem_1():
         ans_exe_1: [int] number of flights with destination "Frankfurt"
         ans_exe_2: [str] flight with the most number of passengers
         ans_exe_3: [str] first flight with less than 100 passengers
-        ans_exe_4: [tuple] airline with most total number of passengers
+        ans_exe_4: [tuple] airline with/and most total number of passengers
     Complexity:
-        time: O(n).
-        storage: O(n).
+        time: O(n)
+        storage: O(n)
     Explanation:
         This functions implements the solution of the problem_1 assignment,
         following the convention and format stated in the statement. This
         function is intented to be invoked from the main() function only,
         so that it can be modified without too much harm on the overall
-        effect.
+        functionality.
     """
 
     path='./'
@@ -265,7 +265,7 @@ def solve_problem_1():
         ans_exe_3 += str(pssgs[idx_first_less_100_flight])
 
     if idx_max_passenger_airline == -1:
-        ans_exe_4 = "The file is empty!"
+        ans_exe_4 = ("The file is empty!", '')
     else:
         ans_exe_4 = (airls[idx_max_passenger_airline], cnt)
 
