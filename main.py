@@ -8,7 +8,7 @@
 """
 
 
-def interface(path='./', file='input.txt'):
+def import_flights(path='./', file='input.txt'):
     """
     Input:
         path: string variable specifying the path towards the file.
@@ -18,21 +18,20 @@ def interface(path='./', file='input.txt'):
     Complexity:
         time: O(n), where n is the number of flights.
         space: O(n), where n is the number of flights.
-
     Explanation:
-        since the input file, 'input.txt', contains structured data, such that each line of
-        the file aims to store information about a different outbound flight from Budapest,
-        each line is made of two strings and an integer number, separated by whitespaces, that
-        describe the given flight...
-
-        the file is splitted by the '\n' -new line- character, by processig the file once and 
-        saving a new line when the '\n' character is found at the end of a line...
-        the raw lines of the input file are imported into Python as a list of composed strings,
-        'lines'. This way we preserve the structure of the data by having each entry in the
-        'lines' list corresponding to the description of a different flight, furthermore,
-        this approach preserves the relative order of the file.
-
-        * the size of the file is proportional to the number of flights registered in it *
+        Since the input file, 'input.txt', contains structured data, such
+        that each line is made of two strings and an integer number, separated
+        by whitespaces, describing the given flight, and so that the order
+        matters, the file can be splitted by the new-line ('\n') character,
+        by processig the file once, character-by-character, appending a new
+        line into list 'lines' each time the '\n' character is found at the
+        end of a line.
+        This way we preserve the structure of the data by having each entry
+        in the 'lines' list corresponding to the description of a different
+        flight. Furthermore, this approach preserves the relative order of
+        the file. The size of the file is proportional to the number of flights
+        registered in it, therefore this algorithm has a linear complexity,
+        on the number of flights, both in time and storage.
     """
 
     with open(path+file, 'r', encoding="utf-8") as doc:
@@ -51,21 +50,21 @@ def split_lines(lines):
     Complexity:
         time: O(n), where n is the number of flights.
         space: O(n), where n is the number of flights.
-
     Explanation:
-        since the airline and destination names do not contain space characters,
+        Since the airline and destination names do not contain space characters,
         neither does the number of passengers, we split each line of the file by
         white-space characters, to retrieve a tuple made of three items:
-            - name of airline that operates the given flight (string variable)
-            - destination of the given flight (string variable)
-            - number of passengers transported by the given flight (int variable)
 
-        * we parse the number of passengers to 'int' type * ...
+            - name of the airline that operates the flight (string variable)
+            - destination of the flight (string variable)
+            - number of passengers transported by the flight (int variable)
 
-        we traverse the list of lines once, while appending each splitted line's
-        items to their corresponding lists, 'airls', 'dests' or 'pssgs', in the
-        same order as the lines were read from the file. This way, we preserve the
-        ascending alphabetical order of the flights by airline name.
+        We traverse the list of lines once, while appending each splitted
+        line's items to their corresponding lists, 'airls', 'dests' or 'pssgs',
+        in the same order as the lines were imported from the file. This way,
+        we preserve the ascending alphabetical order of the flights by airline
+        name and garantee a linear complexity in the implementation, on the
+        number of flights, both in time and storage.
     """
 
     airls = []
@@ -79,7 +78,7 @@ def split_lines(lines):
     return airls, dests, pssgs
 
 
-def exercise1(dests):
+def count_to_frankfurt_flights(dests):
     """
     Input:
         dests: list of strings corresponding to the destinations of each flight.
@@ -88,18 +87,17 @@ def exercise1(dests):
     Complexity:
         time: O(n), where n is the number of flights.
         space: O(n), where n is the number of flights.
-
     Explanation:
-        since the flights are ordered by airline name, instead of destination name, we
+        Since the flights are ordered by airline name, instead of destination name, we
         cannot simply sum up consecutive occurrences of the destination "Frankfurt" in
-        some binary search fashion, with, on average, O(log n) operations, and
-        reordering the list by 'destination' would take at worst O(n log n) operations,
-        thus, a linear time implementation is prefered...
+        some binary search fashion, with, on average, O(log n) operations. Furthermore,
+        reordering the list by 'destination' would take at worst O(n log n) operations.
 
-        since the destination name "Frankfurt" could appear anywhere in the list, in the best
-        linear implementation, we have to visit all elements in the list once, in order to
-        know whether to count them or not: access every entry in the list once, to check if
-        its value equals the string "Frankfurt"; if it does, update a counter of the number
+        Thus, a linear time implementation is prefered: since the destination name
+        "Frankfurt" could appear anywhere in the list, in the best linear implementation,
+        we have to visit all elements in the list once, in order to know whether to count
+        them or not i.e access every entry in the list once, to check if its value equals
+        the string "Frankfurt"; if it does, update a counter of the number
         of times the destination "Frankfurt" appeared, increasing it by one unit.
     """
 
@@ -111,7 +109,7 @@ def exercise1(dests):
     return cntr
 
 
-def exercise2(pssgs):
+def find_max_passengers_flight(pssgs):
     """
     Input:
         pssgs: list of ints abstracting number of passengers per each flight.
@@ -143,7 +141,7 @@ def exercise2(pssgs):
     return indx
 
 
-def exercise3(pssgs):
+def find_first_less_100_flight(pssgs):
     """
     Input:
         pssgs: list of ints abstracting number of passengers per each flight.
@@ -166,7 +164,7 @@ def exercise3(pssgs):
         return indx
 
 
-def exercise4(airls, pssgs):
+def find_max_passengers_airline(airls, pssgs):
     """
     Input:
         airls: list of strings abstracting airlines' names.
@@ -206,7 +204,7 @@ def exercise4(airls, pssgs):
     return indx, most
 
 
-def solution(verbose=True):
+def solve_problem_1():
     """
     Input:
         verbose: string indicating to print out in console the flow.
@@ -225,31 +223,41 @@ def solution(verbose=True):
 
     path='./'
     file='input.txt'
-    lines = interface(path, file)
+
+    lines = import_flights(path, file)
 
     airls, dests, pssgs = split_lines(lines)
 
-    cntr1 = exercise1(dests)
-    indx2 = exercise2(pssgs)
-    indx3 = exercise3(pssgs)
-    indx4, most4 = exercise4(airls, pssgs)
+    cntr_to_frankfurt_flights = count_to_frankfurt_flights(dests)
+    idx_max_passengers_flight = find_max_passengers_flight(pssgs)
+    idx_first_less_100_flight = find_first_less_100_flight(pssgs)
+    idx_max_passenger_airline, cnt = find_max_passengers_airline(airls, pssgs)
 
-    if verbose:
-        print(cntr1)
-        if indx2 == -1:
-            print("The file is empty!")
-        else:
-            print(airls[indx2], dests[indx2], pssgs[indx2])
-        if indx3 == -1:
-            print("There is no flight with passengers less than 100.")
-        else:
-            print(airls[indx3], dests[indx3], pssgs[indx3])
-        if indx4 == -1:
-            print("The file is empty!")
-        else:
-            print(airls[indx4], most4)
+    ans_exe_1 = cntr_to_frankfurt_flights
+    ans_exe_2 = ""
+    ans_exe_3 = ""
+    ans_exe_4 = ""
+    if idx_max_passengers_flight == -1:
+        ans_exe_2 += "The file is empty!"
+    else:
+        ans_exe_2 += airls[idx_max_passengers_flight] + ' '
+        ans_exe_2 += dests[idx_max_passengers_flight] + ' '
+        ans_exe_2 += str(pssgs[idx_max_passengers_flight])
 
-    return cntr1, indx2, indx3, indx4, most4
+    if idx_first_less_100_flight == -1:
+        ans_exe_3 += "There is no flight with passengers less than 100."
+    else:
+        ans_exe_3 += airls[idx_first_less_100_flight] + ' '
+        ans_exe_3 += dests[idx_first_less_100_flight] + ' '
+        ans_exe_3 += str(pssgs[idx_first_less_100_flight])
+
+    if idx_max_passenger_airline == -1:
+        ans_exe_4 += "The file is empty!"
+    else:
+        ans_exe_4 += airls[idx_max_passenger_airline] + ' '
+        ans_exe_4 += str(cnt)
+
+    return (ans_exe_1, ans_exe_2, ans_exe_3, ans_exe_4)
 
 
 def main():
@@ -265,7 +273,15 @@ def main():
         Execute this function first.
     """
 
-    solution()
+    ans_exe_1, ans_exe_2, ans_exe_3, ans_exe_4 = solve_problem_1()
+
+    print(ans_exe_1)
+    print(ans_exe_2)
+    print(ans_exe_3)
+    print(ans_exe_4)
+
+    return 0
 
 
+#BEGINNING OF EXECUTION
 main()
