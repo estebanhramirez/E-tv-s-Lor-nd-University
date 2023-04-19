@@ -166,10 +166,10 @@ def find_first_less_100_flight(pssgs):
     indx = 0
     while indx < len(pssgs) and pssgs[indx] >= 100:
         indx += 1
-    if indx >= len(pssgs)-1:
-        return -1
-    else:
+    if pssgs[indx] < 100:
         return indx
+    else:
+        return -1
 
 
 def find_max_passengers_airline(airls, pssgs):

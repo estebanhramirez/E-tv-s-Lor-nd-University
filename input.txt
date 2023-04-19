@@ -1,0 +1,16 @@
+Viva Bogotá 230
+Viva Medellín 200
+Viva Bogotá 120
+Avianca Bogotá 170
+Avianca Ibagué 199
+Avianca Medellín 300
+Avianca Bogotá 350
+Satena Ibagué 350
+Satena Ibagué 260
+Satena Medellín 250
+Alitalia Frankfurt 120
+Iberia Frankfurt 200
+Iberia Frankfurt 400
+AirFrance Frankfurt 190
+AirFrance Frankfurt 180
+easyJet Frankfurt 90
