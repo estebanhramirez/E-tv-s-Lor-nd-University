@@ -106,21 +106,36 @@ def count_to_frankfurt_flights(dests):
         time: O(n)
         storage: O(n)
     Explanation:
-        Since  the flights  are ordered by airline name, instead
-        of destination name, we cannot simply sum up consecutive
-        occurrences  of  destination "Frankfurt"  in some binary
-        search fashion,  with, on  average, O(log n) operations.
-        Furthermore, reordering  the list by  'destination' will
-        take  at worst  O(n log n) operations.   Thus,  a linear
-        time  implementation is prefered:  since the destination
-        name  "Frankfurt" could appear  anywhere in the list, in
-        the best  linear implementation,   we have to  visit all
-        elements in  the list once, in order  to know whether to
-        count them  or not  i.e  access  every entry in the list
-        once, to check  if its value  equals "Frankfurt";  if it
-        does,  then update a counter of  the number of times the
-        destination  "Frankfurt" appeared,  increasing it by one
-        unit.
+        The aim  of  this algorithm is to  count the
+        number  of  flights  with  destination value
+        equal to "Frankfurt".  Now,  the flights are
+        ordered with respect to the 'airline' column
+        instead of  the 'destination' column,  so we
+        cannot simply sum up consecutive occurrences
+        of  destination  "Frankfurt"  in some binary
+        search fashion, with, on  average, less than
+        O(log n)  operations.  Any  sub-linear  time
+        complexity  implementation  is   unfeasible,
+        since, reordering the list by  'destination'
+        column  will  take,  on average,  O(n log n)
+        operations. Thus,  a linear  time-complexity
+        implementation is prefered: notice the value
+        "Frankfurt"  could  appear  anywhere  in the
+        list 'dests', then, even in  the best linear
+        implementation,  we  will  have to visit all
+        elements in the list once, in order to  know
+        whether to count them  or not   i.e   access
+        every entry  in the list once,  to check  if
+        its value  equals  "Frankfurt";  if it does,
+        then update a counter of the number of times
+        the destination "Frankfurt" appeared in  the
+        list, increasing it by one unit.
+
+        This  algorithm  has a  linear complexity on
+        the  number of flights,  both  in time   and
+        storage,  since we traverse the list 'dests'
+        only once, while this function allocates the
+        storage for only one copy of list 'dests'.
     """
 
     cntr = 0
@@ -142,10 +157,15 @@ def find_max_passengers_flight(pssgs):
         time: O(n)
         storage: O(n)
     Explanation:
-        Since the flights are ordered by airline name, instead of
-        number of passengers per flight, the flights with minimum
-        and maximum number of passengers do not correspond to the
-        first and last elements in the list,  respectively,   and
+        The aim  of  this algorithm is to  count the
+        number  of  flights  with  destination value
+        equal to "Frankfurt".  Now,  the flights are
+        ordered with respect to the 'airline' column
+        instead of the 'number of passngers' column,
+        so the flights with the  minimum and maximum
+        number  of  passengers  do  not  necessarily
+        correspond to the first and last elements in
+        the list,  respectively, and
         reordering the list by 'destination' would take  at worst
         O(n log n) operations. Thus, a linear time implementation
         is prefered:    considering that the maximum could appear
