@@ -1,0 +1,44 @@
+Test 1 (no character): Passes
+Test 2 (only one space character): Fails
+ 
+Test 3 (only one new-line character): Fails
+
+
+Test 4 (one flight, NO Frankfurt, NO less than 100): Passes
+Avianca Bogotá 101
+Test 4 (one flight, Frankfurt, NO less than 100): Passes
+Avianca Frankfurt 101
+Test 5 (one flight, NO Frankfurt, less than 100): Passes
+Avianca Bogotá 99
+Test 6 (one flight, Frankfurt, less than 100): Passes
+Avianca Frankfurt 99
+Test 7 (two flights, one airline, NO Frankfurt, NO less than 100): Passes
+Avianca Bogotá 100
+Avianca Medellín 150
+and
+Avianca Bogotá 150
+Avianca Medellín 100
+Test 8 (two flights, one airline, Frankfurt, NO less than 100): Passes
+Avianca Frankfurt 100
+Avianca Medellín 150
+and
+Avianca Bogotá 100
+Avianca Frankfurt 150
+and
+Avianca Frankfurt 100
+Avianca Frankfurt 150
+and
+Avianca Frankfurt 150
+Avianca Frankfurt 100
+Test 8 (two flights, one airline, NO Frankfurt, less than 100): Passes
+Avianca Bogotá 100
+Avianca Medellín 99
+and
+Avianca Bogotá 99
+Avianca Medellín 103
+and
+Avianca Bogotá 99
+Avianca Medellín 98
+and
+Avianca Bogotá 98
+Avianca Medellín 99

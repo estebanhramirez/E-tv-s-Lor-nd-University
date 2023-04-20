@@ -11,32 +11,35 @@
 def import_flights(path='./', file='input.txt'):
     """
     Input:
-        path: [str] string variable specifying the path towards the file
-        file: [str] string variable specifying the name of the file
+        path: [str] path towards the file
+        file: [str] name of the file
     Output:
-        lines: [str array] list of raw lines of the input file
+        lines: [str array] lines of the input file
     Complexity:
         time: O(n)
         storage: O(n)
     Explanation:
-        Since  the  input file,  'input.txt',  contains  structured
-        data,  such that  each line is  made of  two strings and an
-        integer  number, separated  by whitespaces, describing  the
-        given  flight,   so that  the order matters,  the file  can
-        be splitted by the new-line ('\n') character, by processing
-        the  file  once,  character-by-character,  appending  a new
-        line  into  list  'lines'  each time the  '\n' character is
-        found  at the end  of a line.  This way,  we  preserve  the
-        structure  of the  data by  having each entry in the 'lines'
-        list corresponding to the description of a different flight.
-        Furthermore,  this  approach  preserves  the relative order
-        of the file.  The size  of the file  is proportional to the
-        number of  flights written  in it, therefore this algorithm
-        has a linear complexity, on the number of flights,  both in
-        time and storage.
+        The aim of this algorithm is to preserve the
+        structured  meaning  of  the  data by making
+        each entry in the 'lines' list correspond to
+        the description of a different flight. To do
+        so,  the  file  is splitted  by the new-line
+        character ('\n'). Furthermore, this approach
+        preserves  the  relative  order of the file,
+        as  each flight is read in the same order as
+        it was written in the file (top-to-bottom).
+
+        This  algorithm  has a  linear complexity on
+        the  number of flights,  both  in time   and
+        storage, since the file is read once and the
+        size  of  the  file  is  proportional to the
+        number of flights  written  in it,  and only
+        one list 'lines' is allocated in memory.
     """
 
-    with open(path+file, 'r', encoding="utf-8") as doc:
+    direct = path+file
+
+    with open(direct, 'r', encoding="utf-8") as doc:
         lines = doc.readlines()
 
     return lines
@@ -45,29 +48,39 @@ def import_flights(path='./', file='input.txt'):
 def split_lines(lines):
     """
     Input:
-        lines: [str array] list of raw lines of the input file
+        lines: [str array] lines of the input file
     Output:
-        airls: [str array] list of airlines for each flight
-        dests: [str array] list of destinations for each flight
-        pssgs: [int array] list of number of passengers for each flight
+        airls: [str array] list of airlines
+        dests: [str array] list of destinations
+        pssgs: [int array] list of passngers numbers
     Complexity:
         time: O(n)
         storage: O(n)
     Explanation:
-        Since the airline and destination names do not contain space
-        characters, neither does the number of passengers,  we split
-        each line of the file by white-space characters, to retrieve
-        a tuple made of three items:
-            1. name of the airline that operates the flight [str]
-            2. destination of the flight [str]
-            3. number of passengers transported by the flight [int]
-        We  traverse  the list of lines once,   while appending each
-        splitted  line's items to separate lists,  'airls',  'dests'
-        or 'pssgs',   in the same order  as the lines  were imported
-        from the file.   This way,  we preserve  the given ascending
-        alphabetical  order of the flights  by airline  and garantee
-        a linear complexity in  the implementation, on the number of
-        flights, both in time and storage.
+        The  aim  of  this  algorithm is to separate
+        each of the columns: 'airline','destination'
+        and 'number of passengers', while preserving
+        the  ascending  alphabetical  order  of  the
+        flights by 'airline' column. Since 'airline'
+        and  'destination'  values  do  not  contain
+        space-characters,  neither does  the integer
+        'number of passengers',  we split  each line
+        of the file  by  white-space  characters, in
+        the same order  as  the lines were  imported
+        from  the  file, to retrieve a tuple made of
+        three items:
+                    1. name of the airline [str]
+                    2. destination [str]
+                    3. number of passengers [int]
+
+        This  algorithm  has a  linear complexity on
+        the  number of flights,  both  in time   and
+        storage,  since we traverse the list 'lines'
+        once,  while appending  each of the splitted
+        line's  tuple  items  to their corresponding
+        separated lists,'airls','dests' and 'pssgs',
+        whereas  each  of  these  lists have as many
+        entries as flights in the file.
     """
 
     airls = []
@@ -86,9 +99,9 @@ def split_lines(lines):
 def count_to_frankfurt_flights(dests):
     """
     Input:
-        dests: [str array] list of destinations for each flight
+        dests: [str array] list of destinations
     Output:
-        cntr: [int] number of flights with destination "Frankfurt"
+        cntr: [int] number of flights to "Frankfurt"
     Complexity:
         time: O(n)
         storage: O(n)

@@ -1,4 +1,2 @@
-Alitalia Frankfurt 99
-Avianca Frankfurt 100
 Avianca Bogotá 98
-Avianca Frankfurt 99
+Avianca Medellín 99
