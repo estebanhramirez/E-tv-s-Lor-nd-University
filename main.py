@@ -19,22 +19,21 @@ def import_flights(path='./', file='input.txt'):
         time: O(n)
         storage: O(n)
     Explanation:
-        Since the input file,  'input.txt',  contains structured
-        data,  such that each line is made of two strings and an
-        integer number, separated by whitespaces, describing the
-        given flight,   so that the order matters,  the file can
+        Since  the  input file,  'input.txt',  contains  structured
+        data,  such that  each line is  made of  two strings and an
+        integer  number, separated  by whitespaces, describing  the
+        given  flight,   so that  the order matters,  the file  can
         be splitted by the new-line ('\n') character, by processing
-        the file once,  character-by-character,  appending a new
-        line into list 'lines'  each time the  '\n' character is
-        found at the end of a line.    This way, we preserve the
-        structure of the data by having each entry in the 'lines'
-        list corresponding to the description of a different
-        flight.
-        Furthermore,  this approach preserves  the relative order
-        of the file.  The size of the file is proportional to the
-        number of flights written in it, therefore this algorithm
-        has a linear complexity,  on the number of flights,  both
-        in time and storage.
+        the  file  once,  character-by-character,  appending  a new
+        line  into  list  'lines'  each time the  '\n' character is
+        found  at the end  of a line.  This way,  we  preserve  the
+        structure  of the  data by  having each entry in the 'lines'
+        list corresponding to the description of a different flight.
+        Furthermore,  this  approach  preserves  the relative order
+        of the file.  The size  of the file  is proportional to the
+        number of  flights written  in it, therefore this algorithm
+        has a linear complexity, on the number of flights,  both in
+        time and storage.
     """
 
     with open(path+file, 'r', encoding="utf-8") as doc:
@@ -59,15 +58,15 @@ def split_lines(lines):
         characters, neither does the number of passengers,  we split
         each line of the file by white-space characters, to retrieve
         a tuple made of three items:
-            1. name of the airline that operates the flight [str variable]
-            2. destination of the flight [str variable]
-            3. number of passengers transported by the flight [int variable]
-        We traverse  the list of lines once,   while appending each
-        splitted line's items to separate lists,  'airls',  'dests'
-        or 'pssgs',   in the same order  as the lines were imported
-        from the file.   This way,  we preserve the given ascending
-        alphabetical order of the flights  by airline  and garantee
-        a linear complexity in the implementation, on the number of
+            1. name of the airline that operates the flight [str]
+            2. destination of the flight [str]
+            3. number of passengers transported by the flight [int]
+        We  traverse  the list of lines once,   while appending each
+        splitted  line's items to separate lists,  'airls',  'dests'
+        or 'pssgs',   in the same order  as the lines  were imported
+        from the file.   This way,  we preserve  the given ascending
+        alphabetical  order of the flights  by airline  and garantee
+        a linear complexity in  the implementation, on the number of
         flights, both in time and storage.
     """
 
@@ -166,15 +165,15 @@ def find_first_less_100_flight(pssgs):
         time: O(n)
         storage: O(n)
     Idea:
-        Since the flights are ordered  by airline name,  instead of number
-        of passengers per flight, then the first flight with less than 100
-        passengers can occur anywhere  in the list and its position cannot
-        be deduced  from its surrounding entries.  Therefore, we must loop
+        Since  the flights are  ordered  by airline name,  instead of number
+        of passengers  per flight, then  the first flight with less than 100
+        passengers  can occur anywhere  in the list  and its position cannot
+        be deduced  from its  surrounding entries.  Therefore,  we must loop
         through 'pssgs' until the first flight with less than 100 passengers
-        is found  or the iterable index  exceeds the number of flights. In
-        the worst case, this element can be last of the list, or can never
-        occur in the list. Thus the best possible implementation must be a
-        linear, in time and storage,  complexity algorithm,  on the number
+        is  found  or  the iterable index  exceeds the number of flights. In
+        the worst case,  this element can be last of the list,  or can never
+        occur  in the list.  Thus the best possible implementation must be a
+        linear,  in time and  storage,  complexity algorithm,  on the number
         of flights.
     """
 
