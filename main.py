@@ -157,24 +157,41 @@ def find_max_passengers_flight(pssgs):
         time: O(n)
         storage: O(n)
     Explanation:
-        The aim  of  this algorithm is to  count the
-        number  of  flights  with  destination value
-        equal to "Frankfurt".  Now,  the flights are
+        The aim  of  this algorithm is  to find  the
+        index, in  the  list, of the flight with the
+        most number of passengers. Now,  flights are
         ordered with respect to the 'airline' column
         instead of the 'number of passngers' column,
         so the flights with the  minimum and maximum
         number  of  passengers  do  not  necessarily
         correspond to the first and last elements in
-        the list,  respectively, and
-        reordering the list by 'destination' would take  at worst
-        O(n log n) operations. Thus, a linear time implementation
-        is prefered:    considering that the maximum could appear
-        anywhere in the list,   we have to keep record of a local
-        maximum variable and its index, then do a linear scan through
-        every element in the list,  so that if the element is greater
-        than the current maximum, then it's updated with this element
-        and the current index is reset.  Thus this implementation has
-        a linear time and storage complexity on the number of flights.
+        the list, respectively,  so we cannot simply
+        take  the  last  element  as  the  number of
+        passengers corresponding to  the flight with
+        most number of passengers, in  O(1) time. As
+        a matter of fact,  for an unsorted list  any
+        sub-linear time complexity implementation is
+        unfeasible, since reordering the list by the
+        'number of passngers'  column will take,  on
+        average,  O(n log n)  operations.   Thus,  a
+        linear  time  complexity  implementation  is
+        prefered:  notice that  the maximum of  list
+        'pssgs'  can occur anywhere in the list,  so
+        we keep track of  a  local maximum  variable
+        and its index,  then a  linear scan  through
+        the list garantees that once the entire list
+        has  been  traversed,  the  local maximum is
+        the global maximum. So every  element in the
+        list is checked  and  if it is the case that
+        a element is greater than the local maximum,
+        then  it's updated with this element and the
+        current index is reset to its index.
+
+        This  algorithm  has a  linear complexity on
+        the  number of flights,  both  in time   and
+        storage,  since we traverse the list 'pssgs'
+        only once, while this function allocates the
+        storage for only one copy of list 'pssgs'.
     """
 
     indx = -1
