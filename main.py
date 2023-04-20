@@ -1,5 +1,5 @@
 """
-    Title: Eotvos Lorand University PROBLEM 1 Assignment solution.
+    Title: PROBLEM 1 Assignment solution.
     Author: Esteban Hernandez Ramirez.
     Date: April 2023.
     GitHub repository:
@@ -150,9 +150,10 @@ def count_to_frankfurt_flights(dests):
 def find_max_passengers_flight(pssgs):
     """
     Input:
-        pssgs: [int array] list of number of passengers for each flight
+        pssgs: [int array] list of passngers numbers
     Output:
-        indx: [int] list index of flight with the most number of passengers
+        indx: [int] list index of the flight with
+                    the most number of passengers
     Complexity:
         time: O(n)
         storage: O(n)
@@ -208,23 +209,38 @@ def find_max_passengers_flight(pssgs):
 def find_first_less_100_flight(pssgs):
     """
     Input:
-        pssgs: [int array] list of number of passengers for each flight
+        pssgs: [int array] list of passngers numbers
     Output:
-        indx: [int] list index of first flight with less than 100 passengers
+        indx: [int] list index of first flight with
+                    less than 100 passengers
     Complexity:
         time: O(n)
         storage: O(n)
     Idea:
-        Since  the flights are  ordered  by airline name,  instead of number
-        of passengers  per flight, then  the first flight with less than 100
-        passengers  can occur anywhere  in the list  and its position cannot
-        be deduced  from its  surrounding entries.  Therefore,  we must loop
-        through 'pssgs' until the first flight with less than 100 passengers
-        is  found  or  the iterable index  exceeds the number of flights. In
-        the worst case,  this element can be last of the list,  or can never
-        occur  in the list.  Thus the best possible implementation must be a
-        linear,  in time and  storage,  complexity algorithm,  on the number
-        of flights.
+        The aim  of  this algorithm is  to find  the
+        index,  in  the  list  'pssgs', of the first
+        flight  with  less than 100 passengers. Now,
+        flights  are  ordered  with  respect  to the
+        'airline' column instead of  the  'number of
+        passengers' column, so the first flight with
+        less than 100 passengers  can occur anywhere
+        in  the  list  and  its  position  cannot be
+        deduced from its surrounding entries i.e the
+        position of a flight  is  not  determined by
+        its number of passengers. In the worst case,
+        this element can be last of the list, or can
+        never  occur  in the list at all. Therefore,
+        the  best  possible  implementation  must be
+        linear.  Thus,  we must loop through 'pssgs'
+        until  the  first  flight with less than 100
+        passengers is found  or  the iterable  index
+        exceeds the number of flights.
+
+        This  algorithm  has a  linear complexity on
+        the  number of flights,  both  in time   and
+        storage,  since we traverse the list 'pssgs'
+        at most once,  while this function allocates
+        storage for only one copy of list 'pssgs'.
     """
 
     indx = 0
@@ -244,22 +260,40 @@ def find_first_less_100_flight(pssgs):
 def find_max_passengers_airline(airls, pssgs):
     """
     Input:
-        airls: [str array] list of airlines for each flight
-        pssgs: [int array] list of number of passengers for each flight
+        airls: [str array] list of airlines
+        pssgs: [int array] list of passngers numbers
     Output:
-        indx: [int] list index of airline with most total number of passengers
+        indx: [int] list index of the airline with
+                    most total number of passengers
+        most: [int] most total number of passengers
     Complexity:
         time: O(n)
         storage: O(n)
     Idea:
-        Since the flights are ordered by airline name, we can take advantage
-        of the fact that that  all flights supported by the same airline are
-        contiguous in the list. This way,  we sum consecutive entries, until
-        the next entry corresponds to  a different airline, then we check if
-        the  current sum is greater than  the greatest sum yet, stored  in a
-        temp variable; if it does we reset the temp variable with the sum of
-        the current airline. Thus, this implementation has a linear time and
-        storage complexity on the number of flights.
+        The aim of this algorithm is to find a index
+        for  the  airline with the most total number
+        of passengers. Since, the flights are sorted
+        with respect to the 'airline' column, we can
+        take  advantage  of  the  fact that that all
+        flights  supported  by  the same airline are
+        contiguous in  the lists.  This way,  we can
+        sum consecutive entries of the list 'pssgs',
+        until  the next entry  of  the  list 'airls'
+        corresponds to a different airline,  then we
+        check if the current sum is greater than the
+        greatest sum yet, stored in a temp variable;
+        if it does we reset  the temp variable  with
+        the sum of the current airline and  reset an
+        auxiliar variable, storing the  index of the
+        last entry added to the sum.
+
+        This  algorithm  has a  linear complexity on
+        the  number of flights,  both  in time   and
+        storage, since we,  simultaniously, traverse
+        the lists 'airls'  and  'pssgs' once,  while
+        this function  allocates  storage  for  only
+        one  copy  of  list 'airls' and one copy  of
+        list 'pssgs'.
     """
 
     if len(airls) == 1:
@@ -300,11 +334,13 @@ def solve_problem_1():
         time: O(n)
         storage: O(n)
     Explanation:
-        This functions  implements the solution of the  problem_1
-        assignment,  following  the convention and  format stated
-        in the statement. This function is intented to be invoked
-        from the main() function only, so that it can be modified
-        without too much harm on the overall functionality.
+        This  functions  implements  the solution of
+        the  problem  1  assignment,  following  the
+        convention and  format stated in the problem
+        statement.  This function  is intented to be
+        invoked from the main function only, so that
+        it  can be modified without too much harm on
+        the overall functionality.
     """
 
     path='./'
