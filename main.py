@@ -17,24 +17,29 @@ def import_flights(path='./', file='input.txt'):
         lines: [str array] list of raw lines of the input file
     Complexity:
         time: O(n)
-        space: O(n)
+        storage: O(n)
     Explanation:
-        Since the input file, 'input.txt', contains structured data, such
-        that each line is made of two strings and an integer number, separated
-        by whitespaces, describing the given flight, and so that the order
-        matters, the file can be splitted by the new-line ('\n') character,
-        by processig the file once, character-by-character, appending a new
-        line into list 'lines' each time the '\n' character is found at the
-        end of a line. This way we preserve the structure of the data by
-        having each entry in the 'lines' list corresponding to the description
-        of a different flight. Furthermore, this approach preserves the
-        relative order of the file. The size of the file is proportional to
-        the number of flights registered in it, therefore this algorithm has a
-        linear complexity, on the number of flights, both in time and storage.
+        Since the input file,  'input.txt',  contains structured
+        data,  such that each line is made of two strings and an
+        integer number, separated by whitespaces, describing the
+        given flight,   so that the order matters,  the file can
+        be splitted by the new-line ('\n') character, by processing
+        the file once,  character-by-character,  appending a new
+        line into list 'lines'  each time the  '\n' character is
+        found at the end of a line.    This way, we preserve the
+        structure of the data by having each entry in the 'lines'
+        list corresponding to the description of a different
+        flight.
+        Furthermore,  this approach preserves  the relative order
+        of the file.  The size of the file is proportional to the
+        number of flights written in it, therefore this algorithm
+        has a linear complexity,  on the number of flights,  both
+        in time and storage.
     """
 
     with open(path+file, 'r', encoding="utf-8") as doc:
         lines = doc.readlines()
+
     return lines
 
 
@@ -48,31 +53,34 @@ def split_lines(lines):
         pssgs: [int array] list of number of passengers for each flight
     Complexity:
         time: O(n)
-        space: O(n)
+        storage: O(n)
     Explanation:
         Since the airline and destination names do not contain space
-        characters, neither does the number of passengers, we split each
-        line of the file by white-space characters, to retrieve a tuple made
-        of three items:
-            1. name of the airline that operates the flight (string variable)
-            2. destination of the flight (string variable)
-            3. number of passengers transported by the flight (int variable)
-        We traverse the list of lines once, while appending each splitted
-        line's items to separate lists, 'airls', 'dests' or 'pssgs',
-        in the same order as the lines were imported from the file. This way,
-        we preserve the ascending alphabetical order of the flights by airline
-        and garantee a linear complexity in the implementation, on the number
-        of flights, both in time and storage.
+        characters, neither does the number of passengers,  we split
+        each line of the file by white-space characters, to retrieve
+        a tuple made of three items:
+            1. name of the airline that operates the flight [str variable]
+            2. destination of the flight [str variable]
+            3. number of passengers transported by the flight [int variable]
+        We traverse  the list of lines once,   while appending each
+        splitted line's items to separate lists,  'airls',  'dests'
+        or 'pssgs',   in the same order  as the lines were imported
+        from the file.   This way,  we preserve the given ascending
+        alphabetical order of the flights  by airline  and garantee
+        a linear complexity in the implementation, on the number of
+        flights, both in time and storage.
     """
 
     airls = []
     dests = []
     pssgs = []
+
     for line in lines:
         airl, dest, pssg = line.split()
         airls.append(airl)
         dests.append(dest)
         pssgs.append(int(pssg))
+
     return airls, dests, pssgs
 
 
@@ -84,24 +92,27 @@ def count_to_frankfurt_flights(dests):
         cntr: [int] number of flights with destination "Frankfurt"
     Complexity:
         time: O(n)
-        space: O(n)
+        storage: O(n)
     Explanation:
-        Since the flights are ordered by airline name, instead of
-        destination name, we cannot simply sum up consecutive occurrences
-        of the destination "Frankfurt" in some binary search fashion, with,
-        on average, O(log n) operations. Furthermore, reordering the list
-        by 'destination' would take at worst O(n log n) operations.
-
-        Thus, a linear time implementation is prefered: since the
-        destination name "Frankfurt" could appear anywhere in the list, in
-        the best linear implementation, we have to visit all elements in the
-        list once, in order to know whether to count them or not i.e access
-        every entry in the list once, to check if its value equals the string
-        "Frankfurt"; if it does, update a counter of the number of times the
-        destination "Frankfurt" appeared, increasing it by one unit.
+        Since  the flights  are ordered by airline name, instead
+        of destination name, we cannot simply sum up consecutive
+        occurrences  of  destination "Frankfurt"  in some binary
+        search fashion,  with, on  average, O(log n) operations.
+        Furthermore, reordering  the list by  'destination' will
+        take  at worst  O(n log n) operations.   Thus,  a linear
+        time  implementation is prefered:  since the destination
+        name  "Frankfurt" could appear  anywhere in the list, in
+        the best  linear implementation,   we have to  visit all
+        elements in  the list once, in order  to know whether to
+        count them  or not  i.e  access  every entry in the list
+        once, to check  if its value  equals "Frankfurt";  if it
+        does,  then update a counter of  the number of times the
+        destination  "Frankfurt" appeared,  increasing it by one
+        unit.
     """
 
     cntr = 0
+
     for dest in dests:
         if dest == "Frankfurt":
             cntr += 1
@@ -117,28 +128,31 @@ def find_max_passengers_flight(pssgs):
         indx: [int] list index of flight with the most number of passengers
     Complexity:
         time: O(n)
-        space: O(n)
+        storage: O(n)
     Explanation:
-        Since the flights are ordered by airline name, instead of number of
-        passengers per flight, the flights with minimum and maximum number
-        of passengers do not correspond to the first and last elements in
-        the list, respectively, and reordering the list by 'destination'
-        would take at worst O(n log n) operations. Thus, a linear time
-        implementation is prefered: considering that the maximum could
-        appear anywhere in the list, we have to keep record of a local
+        Since the flights are ordered by airline name, instead of
+        number of passengers per flight, the flights with minimum
+        and maximum number of passengers do not correspond to the
+        first and last elements in the list,  respectively,   and
+        reordering the list by 'destination' would take  at worst
+        O(n log n) operations. Thus, a linear time implementation
+        is prefered:    considering that the maximum could appear
+        anywhere in the list,   we have to keep record of a local
         maximum variable and its index, then do a linear scan through
-        every element in the list, so that if the element is greater
-        than the current maximum, then it is updated with this element
-        and the current index is reset. Thus this implementation has
+        every element in the list,  so that if the element is greater
+        than the current maximum, then it's updated with this element
+        and the current index is reset.  Thus this implementation has
         a linear time and storage complexity on the number of flights.
     """
 
     indx = -1
     maxi = 0
+
     for i, pssg in enumerate(pssgs):
         if pssg > maxi:
             indx = i
             maxi = pssg
+
     return indx
 
 
@@ -150,14 +164,14 @@ def find_first_less_100_flight(pssgs):
         indx: [int] list index of first flight with less than 100 passengers
     Complexity:
         time: O(n)
-        space: O(n)
+        storage: O(n)
     Idea:
         Since the flights are ordered  by airline name,  instead of number
         of passengers per flight, then the first flight with less than 100
         passengers can occur anywhere  in the list and its position cannot
         be deduced  from its surrounding entries.  Therefore, we must loop
         through 'pssgs' until the first flight with less than 100 passengers
-        is found or the iterable index exceeds the number of flights.   In
+        is found  or the iterable index  exceeds the number of flights. In
         the worst case, this element can be last of the list, or can never
         occur in the list. Thus the best possible implementation must be a
         linear, in time and storage,  complexity algorithm,  on the number
@@ -165,13 +179,17 @@ def find_first_less_100_flight(pssgs):
     """
 
     indx = 0
+
     while indx < len(pssgs) and pssgs[indx] >= 100:
         indx += 1
 
     if indx >= len(pssgs):
         return -1
-    elif pssgs[indx] < 100:
+
+    if pssgs[indx] < 100:
         return indx
+
+    return -1
 
 
 def find_max_passengers_airline(airls, pssgs):
@@ -183,7 +201,7 @@ def find_max_passengers_airline(airls, pssgs):
         indx: [int] list index of airline with most total number of passengers
     Complexity:
         time: O(n)
-        space: O(n)
+        storage: O(n)
     Idea:
         Since the flights are ordered by airline name, we can take advantage
         of the fact that that  all flights supported by the same airline are
@@ -197,26 +215,27 @@ def find_max_passengers_airline(airls, pssgs):
 
     if len(airls) == 1:
         return 0, pssgs[0]
-    else:
-        indx = -1
-        most = 0
-        cntr = 0
-        for i in range(0, len(airls)-1):
-            cntr += pssgs[i]
-            if airls[i] != airls[i+1]:
-                if cntr > most:
-                    indx = i
-                    most = cntr
-                cntr = 0
 
-            if i == len(airls)-2:
-                cntr += pssgs[-1]
+    indx = -1
+    most = 0
+    cntr = 0
 
-        if cntr > most:
-            indx = len(airls)-1
-            most = cntr
+    for i in range(0, len(airls)-1):
+        cntr += pssgs[i]
+        if airls[i] != airls[i+1]:
+            if cntr > most:
+                indx = i
+                most = cntr
+            cntr = 0
 
-        return indx, most
+        if i == len(airls)-2:
+            cntr += pssgs[-1]
+
+    if cntr > most:
+        indx = len(airls)-1
+        most = cntr
+
+    return indx, most
 
 
 def solve_problem_1():
@@ -232,11 +251,11 @@ def solve_problem_1():
         time: O(n)
         storage: O(n)
     Explanation:
-        This functions implements the solution of the problem_1 assignment,
-        following the convention and format stated in the statement. This
-        function is intented to be invoked from the main() function only,
-        so that it can be modified without too much harm on the overall
-        functionality.
+        This functions  implements the solution of the  problem_1
+        assignment,  following  the convention and  format stated
+        in the statement. This function is intented to be invoked
+        from the main() function only, so that it can be modified
+        without too much harm on the overall functionality.
     """
 
     path='./'
@@ -285,7 +304,7 @@ def main():
         None
     Complexity:
         time: O(n)
-        space: O(n)
+        storage: O(n)
     Explanation:
         Execute this function first.
     """
