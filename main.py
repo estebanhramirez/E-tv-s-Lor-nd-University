@@ -11,8 +11,8 @@
 def import_flights(path='./', file='input.txt'):
     """
     Input:
-        path: [str] path towards the file
-        file: [str] name of the file
+        path: [str] path towards the input file
+        file: [str] name of the input file
     Output:
         lines: [str array] lines of the input file
     Complexity:
@@ -34,7 +34,9 @@ def import_flights(path='./', file='input.txt'):
         storage, since the file is read once and the
         size  of  the  file  is  proportional to the
         number of flights  written  in it,  and only
-        one list 'lines' is allocated in memory.
+        one  list  'lines' is allocated  in  memory,
+        whereas  this  list  has  as many entries as
+        flights in the file.
     """
 
     direct = path+file
@@ -152,7 +154,7 @@ def find_max_passengers_flight(pssgs):
     Input:
         pssgs: [int array] list of passngers numbers
     Output:
-        indx: [int] list index of the flight with
+        indx: [int] list index  of  the  flight with
                     the most number of passengers
     Complexity:
         time: O(n)
@@ -211,7 +213,7 @@ def find_first_less_100_flight(pssgs):
     Input:
         pssgs: [int array] list of passngers numbers
     Output:
-        indx: [int] list index of first flight with
+        indx: [int] list index of first flight  with
                     less than 100 passengers
     Complexity:
         time: O(n)
@@ -263,9 +265,9 @@ def find_max_passengers_airline(airls, pssgs):
         airls: [str array] list of airlines
         pssgs: [int array] list of passngers numbers
     Output:
-        indx: [int] list index of the airline with
-                    most total number of passengers
-        most: [int] most total number of passengers
+        indx: [int] list index  of  the airline with
+                    most total number  of passengers
+        most: [int] most total number  of passengers
     Complexity:
         time: O(n)
         storage: O(n)
@@ -324,12 +326,17 @@ def find_max_passengers_airline(airls, pssgs):
 def solve_problem_1():
     """
     Input:
-        verbose: string indicating to print out in console the flow.
+        None
     Output:
-        ans_exe_1: [int] number of flights with destination "Frankfurt"
-        ans_exe_2: [str] flight with the most number of passengers
-        ans_exe_3: [str] first flight with less than 100 passengers
-        ans_exe_4: [tuple] airline with/and most total number of passengers
+        ans_ex_1: [int] number of flights to the
+                        destination "Frankfurt"
+        ans_ex_2: [str] flight with  the most number
+                        of passengers
+        ans_ex_3: [str] first flight  with less than
+                        100 passengers
+        ans_ex_4: [str,int] airline with most  total
+                            number of passengers and
+                            the number of passengers
     Complexity:
         time: O(n)
         storage: O(n)
@@ -341,6 +348,16 @@ def solve_problem_1():
         invoked from the main function only, so that
         it  can be modified without too much harm on
         the overall functionality.
+
+        This  algorithm  has a  linear complexity on
+        the  number of flights,  both  in time   and
+        storage,  inherited from  the functions that
+        are invoked inside this function:
+
+            1. count_to_frankfurt_flights [O(n)] 
+            2. find_max_passengers_flight [O(n)]
+            3. find_first_less_100_flight [O(n)]
+            4. find_max_passengers_airline [O(n)]
     """
 
     path='./'
@@ -355,30 +372,31 @@ def solve_problem_1():
     idx_first_less_100_flight = find_first_less_100_flight(pssgs)
     idx_max_passenger_airline, cnt = find_max_passengers_airline(airls, pssgs)
 
-    ans_exe_1 = cntr_to_frankfurt_flights
-    ans_exe_2 = ""
-    ans_exe_3 = ""
-    ans_exe_4 = None
+    ans_ex_1 = cntr_to_frankfurt_flights
+    ans_ex_2 = ""
+    ans_ex_3 = ""
+    ans_ex_4 = None
+
     if idx_max_passengers_flight == -1:
-        ans_exe_2 += "The file is empty!"
+        ans_ex_2 += "The file is empty!"
     else:
-        ans_exe_2 += airls[idx_max_passengers_flight] + ' '
-        ans_exe_2 += dests[idx_max_passengers_flight] + ' '
-        ans_exe_2 += str(pssgs[idx_max_passengers_flight])
+        ans_ex_2 += airls[idx_max_passengers_flight] + ' '
+        ans_ex_2 += dests[idx_max_passengers_flight] + ' '
+        ans_ex_2 += str(pssgs[idx_max_passengers_flight])
 
     if idx_first_less_100_flight == -1:
-        ans_exe_3 += "There is no flight with passengers less than 100."
+        ans_ex_3 += "There is no flight with passengers less than 100."
     else:
-        ans_exe_3 += airls[idx_first_less_100_flight] + ' '
-        ans_exe_3 += dests[idx_first_less_100_flight] + ' '
-        ans_exe_3 += str(pssgs[idx_first_less_100_flight])
+        ans_ex_3 += airls[idx_first_less_100_flight] + ' '
+        ans_ex_3 += dests[idx_first_less_100_flight] + ' '
+        ans_ex_3 += str(pssgs[idx_first_less_100_flight])
 
     if idx_max_passenger_airline == -1:
-        ans_exe_4 = ("The file is empty!", '')
+        ans_ex_4 = ("The file is empty!", '')
     else:
-        ans_exe_4 = (airls[idx_max_passenger_airline], cnt)
+        ans_ex_4 = (airls[idx_max_passenger_airline], cnt)
 
-    return (ans_exe_1, ans_exe_2, ans_exe_3, ans_exe_4)
+    return (ans_ex_1, ans_ex_2, ans_ex_3, ans_ex_4)
 
 
 def main():
@@ -392,6 +410,13 @@ def main():
         storage: O(n)
     Explanation:
         Execute this function first.
+
+        This  algorithm  has a  linear complexity on
+        the  number of flights,  both  in time   and
+        storage, inherited from the function that is
+        invoked inside this function:
+
+            1. solve_problem_1 [O(n)]
     """
 
     ans_exe_1, ans_exe_2, ans_exe_3, ans_exe_4 = solve_problem_1()
