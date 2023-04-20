@@ -195,25 +195,28 @@ def find_max_passengers_airline(airls, pssgs):
         storage complexity on the number of flights.
     """
 
-    indx = -1
-    most = 0
-    cntr = 0
-    for i in range(0, len(airls)-1):
-        cntr += pssgs[i]
-        if airls[i] != airls[i+1]:
-            if cntr > most:
-                indx = i
-                most = cntr
-            cntr = 0
+    if len(airls) == 1:
+        return 0, pssgs[0]
+    else:
+        indx = -1
+        most = 0
+        cntr = 0
+        for i in range(0, len(airls)-1):
+            cntr += pssgs[i]
+            if airls[i] != airls[i+1]:
+                if cntr > most:
+                    indx = i
+                    most = cntr
+                cntr = 0
 
-        if i == len(airls)-2:
-            cntr += pssgs[-1]
+            if i == len(airls)-2:
+                cntr += pssgs[-1]
 
-    if cntr > most:
-        indx = len(airls)-1
-        most = cntr
+        if cntr > most:
+            indx = len(airls)-1
+            most = cntr
 
-    return indx, most
+        return indx, most
 
 
 def solve_problem_1():
