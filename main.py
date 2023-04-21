@@ -24,19 +24,21 @@ def import_flights(path='./', file='input.txt'):
         each entry in the 'lines' list correspond to
         the description of a different flight. To do
         so,  the  file  is splitted  by the new-line
-        character ('\n'). Furthermore, this approach
-        preserves  the  relative  order of the file,
-        as  each flight is read in the same order as
+        character ('\n'), to get the list of rows in
+        the file i.e flights. Moreover this approach
+        preserves the relative order of the file, as
+        each row in it is read in the same order  as
         it was written in the file (top-to-bottom).
 
         This  algorithm  has a  linear complexity on
         the  number of flights,  both  in time   and
         storage, since the file is read once and the
         size  of  the  file  is  proportional to the
-        number of flights  written  in it,  and only
-        one  list  'lines' is allocated  in  memory,
-        whereas  this  list  has  as many entries as
-        flights in the file.
+        number of rows  (i.e flights)  in  the file,
+        while  only storage for one list 'lines'  is
+        allocated in memory,   whereas this list has
+        as many entries as rows (i.e flights) in the
+        file. "row" or "line" is used interchangibly
     """
 
     direct = path+file
@@ -46,7 +48,7 @@ def import_flights(path='./', file='input.txt'):
         with open(direct, 'r', encoding="utf-8") as doc:
             lines = doc.readlines()
     except FileNotFoundError:
-        print("ERROR 404: FILE NOT FOUND!")
+        print("¡FILE NOT FOUND! please, change the 'path' variable in main()")
 
     return lines
 
@@ -331,10 +333,11 @@ def find_max_passengers_airline(airls, pssgs):
     return indx, most
 
 
-def solve_problem_1():
+def solve_problem_1(path, file):
     """
     Input:
-        None
+        path: [str] path towards the input file
+        file: [str] name of the input file
     Output:
         ans_ex_1: [int] number of flights to the
                         destination "Frankfurt"
@@ -349,7 +352,7 @@ def solve_problem_1():
         time: O(n)
         storage: O(n)
     Explanation:
-        This  functions  implements  the solution of
+        This  function  implements  the  solution of
         the  problem  1  assignment,  following  the
         convention and  format stated in the problem
         statement.  This function  is intented to be
@@ -367,9 +370,6 @@ def solve_problem_1():
             3. find_first_less_100_flight [O(n)]
             4. find_max_passengers_airline [O(n)]
     """
-
-    path='./'
-    file='input.txt'
 
     lines = import_flights(path, file)
 
@@ -427,12 +427,15 @@ def main():
             1. solve_problem_1 [O(n)]
     """
 
-    ans_exe_1, ans_exe_2, ans_exe_3, ans_exe_4 = solve_problem_1()
+    path='./'
+    file='input.txt'
 
-    print(ans_exe_1)
-    print(ans_exe_2)
-    print(ans_exe_3)
-    print(ans_exe_4[0], ans_exe_4[1])
+    ans_ex_1, ans_ex_2, ans_ex_3, ans_ex_4 = solve_problem_1(path, file)
+
+    print(ans_ex_1)
+    print(ans_ex_2)
+    print(ans_ex_3)
+    print(ans_ex_4[0], ans_ex_4[1])
 
     return 0
 
