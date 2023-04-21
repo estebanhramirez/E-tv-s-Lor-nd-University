@@ -1,5 +1,5 @@
 Test 1 (no character): Passes
-Test 2 (only one space character): Fails
+Test 2 (only one space character): Passes
  
 Test 3 (only one new-line character): Fails
 

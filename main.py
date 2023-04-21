@@ -40,9 +40,13 @@ def import_flights(path='./', file='input.txt'):
     """
 
     direct = path+file
+    lines = []
 
-    with open(direct, 'r', encoding="utf-8") as doc:
-        lines = doc.readlines()
+    try:
+        with open(direct, 'r', encoding="utf-8") as doc:
+            lines = doc.readlines()
+    except FileNotFoundError:
+        print("ERROR 404: FILE NOT FOUND!")
 
     return lines
 
@@ -90,10 +94,14 @@ def split_lines(lines):
     pssgs = []
 
     for line in lines:
-        airl, dest, pssg = line.split()
-        airls.append(airl)
-        dests.append(dest)
-        pssgs.append(int(pssg))
+        try:
+            airl, dest, pssg = line.split()
+        except ValueError:
+            pass
+        else:
+            airls.append(airl)
+            dests.append(dest)
+            pssgs.append(int(pssg))
 
     return airls, dests, pssgs
 
@@ -233,7 +241,7 @@ def find_first_less_100_flight(pssgs):
         this element can be last of the list, or can
         never  occur  in the list at all. Therefore,
         the  best  possible  implementation  must be
-        linear.  Thus,  we must loop through 'pssgs'
+        linear, since  we  must loop through 'pssgs'
         until  the  first  flight with less than 100
         passengers is found  or  the iterable  index
         exceeds the number of flights.
@@ -284,7 +292,7 @@ def find_max_passengers_airline(airls, pssgs):
         corresponds to a different airline,  then we
         check if the current sum is greater than the
         greatest sum yet, stored in a temp variable;
-        if it does we reset  the temp variable  with
+        if it is, we  reset  the  temp variable with
         the sum of the current airline and  reset an
         auxiliar variable, storing the  index of the
         last entry added to the sum.
