@@ -1,20 +1,7 @@
-
-
-
-
-easyJet London 200
-
-
-Avianca Bogotá 90
-
-
-
-
-
-
-
-
-
-
-
-Avianca Frankfurt 101
+Alitalia  Rome	180
+Wizzair	  Cracow	100
+Wizzair Barcelona 150
+Avianca Bogotá 200
+Avianca Frankfurt 100
+Avianca Frankfurt 10
+Alitalia Frankfurt 20

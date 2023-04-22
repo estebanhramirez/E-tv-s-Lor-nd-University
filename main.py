@@ -427,8 +427,12 @@ def main():
             1. solve_problem_1 [O(n)]
     """
 
-    path='./'
-    file='input.txt'
+    try:
+        path = input("Enter <path> towards 'input.txt' (default path='./'):")
+    except ValueError:
+        path = './'
+
+    file = 'input.txt'
 
     ans_ex_1, ans_ex_2, ans_ex_3, ans_ex_4 = solve_problem_1(path, file)
 
